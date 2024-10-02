@@ -196,10 +196,12 @@ ifeq ($(shell lsmod | grep "^brcmfmac" | wc -l), 1)
 endif
 	$(Q)modprobe brcmutil
 	@printf "\033[0;31m  RELOADING\033[0m brcmfmac\n"
-ifeq ($(findstring 4.9,$(shell uname -r)),4.9)
-	$(Q)insmod ../nexmon/brcmfmac_4.9.y-nexmon/brcmfmac.ko
+ifeq ($(findstring 6.6,$(shell uname -r)),6.6)
+	@printf "\033[0;31m  LOADING\033[0m ../../../driver/brcmfmac_6.6.y-nexmon/brcmfmac.ko\n"
+	$(Q)insmod ../../../driver/brcmfmac_6.6.y-nexmon/brcmfmac.ko
 else ifeq ($(findstring 4.14,$(shell uname -r)),4.14)
-	$(Q)insmod ../nexmon/brcmfmac_4.14.y-nexmon/brcmfmac.ko
+	@printf "\033[0;31m  LOADING\033[0m ../../../driver/brcmfmac_4.14.y-nexmon/brcmfmac.ko\n"
+	$(Q)insmod ../../../driver/brcmfmac_4.14.y-nexmon/brcmfmac.ko
 endif
 else
 	$(warning Warning: Cannot install firmware on this arch., bcm43430-sdio.bin needs to be copied manually into /lib/firmware/brcm/ on your RPI3)
